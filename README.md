@@ -13,6 +13,7 @@ Layout was defined by a friend
 ## Idea
 Use ASP.NET Blazor for operating system independence.
 Use SQLLite as only one cliet is needed and migration is easy with copy-paste of app dir.
+Use Entity Framework for ORM.
 
 
 
