@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 
+
+
 namespace Lager_App.Model
 {
     public class Articel

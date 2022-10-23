@@ -32,7 +32,7 @@ using (var provider = builder.Services!.BuildServiceProvider())
 
 
 //Adding Articel Service
-builder.Services.AddScoped<ArticelService>();
+builder.Services.AddScoped<IArticelService,ArticelService>();
 
 
 var app = builder.Build();

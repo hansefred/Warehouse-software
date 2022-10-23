@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lager_App.Service
 {
-    public class ArticelService
+    public class ArticelService : IArticelService
     {
         private readonly ArticelDBContext _dBContext;
         private readonly ILogger<ArticelService> _logger;
@@ -22,16 +22,18 @@ namespace Lager_App.Service
         /// <param name="articel"></param>
         /// <returns>New ArticelNumber</returns>
         /// <exception cref="Exception">If Articelnumer already exists</exception>
-        public async Task<int> CreateArticel (Articel articel)
+        public async Task<int> CreateArticel(Articel articel)
         {
             if (await _dBContext.Articels!.FirstOrDefaultAsync(a => a.ArticelNumber == articel.ArticelNumber) is not null)
             {
-                _logger.LogError("{Articel} with this {Articelnumber} already exists", articel,articel.ArticelNumber);
+                _logger.LogError("{Articel} with this {Articelnumber} already exists", articel, articel.ArticelNumber);
                 throw new Exception("DB Entry already exists");
             }
 
             var result = await _dBContext.Articels!.AddAsync(articel);
             await _dBContext.SaveChangesAsync();
+
+        
 
             return result.Entity.ArticelNumber;
 
@@ -41,7 +43,7 @@ namespace Lager_App.Service
         /// Return all Articel as String
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Articel>> GetArticels ()
+        public async Task<List<Articel>> GetArticels()
         {
             return await _dBContext.Articels!.ToListAsync();
         }
@@ -53,7 +55,7 @@ namespace Lager_App.Service
         /// <param name="Articelnumber"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<Articel> GetArticel (int Articelnumber)
+        public async Task<Articel> GetArticel(int Articelnumber)
         {
             var Articel = await _dBContext.Articels!.FirstOrDefaultAsync(a => a.ArticelNumber == Articelnumber);
 
@@ -73,7 +75,7 @@ namespace Lager_App.Service
         /// <param name="DesiredUnits"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task BookOutArticel (int Articelnumber, int DesiredUnits)
+        public async Task BookOutArticel(int Articelnumber, int DesiredUnits)
         {
             var Articel = await _dBContext.Articels!.FirstOrDefaultAsync(a => a.ArticelNumber == Articelnumber);
 
@@ -109,7 +111,7 @@ namespace Lager_App.Service
                 throw new Exception("DB Entry not found");
             }
 
-           
+
 
             Articel.Count = Articel.Count + Units;
 
@@ -134,7 +136,7 @@ namespace Lager_App.Service
 
             _dBContext.Articels!.Remove(Articel);
 
-        
+
 
             await _dBContext.SaveChangesAsync();
         }
@@ -148,7 +150,7 @@ namespace Lager_App.Service
         /// <param name="Price"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task ChangeArticel (int Articelnumber, string Name, float Price)
+        public async Task ChangeArticel(int Articelnumber, string Name, float Price)
         {
             var Articel = await _dBContext.Articels!.FirstOrDefaultAsync(a => a.ArticelNumber == Articelnumber);
 
