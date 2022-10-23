@@ -1,0 +1,90 @@
+﻿@page "/BookOutArticel/{ArticelNumber}"
+@using Lager_App.Model
+@using Lager_App.Service
+
+@inject ArticelService ArticelService
+@inject NavigationManager NavigationManager
+
+
+<div class="m-2 text-center">
+    <h2>Artikel ausbuchen</h2>
+</div>
+
+@if (Articel is not null)
+{
+    <div class="container m-3">
+        <EditForm Model="@BookOutForm" OnValidSubmit="OnValidSubmit">
+            <div>
+                <div class="row">
+                    <div class="col">
+                        Artikel Nummer:
+                    </div>
+                    <div class="col">
+                        @BookOutForm.ArticelNumber
+                    </div>
+                    <div class="row mt-1">
+                    <div class="col">
+                        Menge:
+                    </div>
+                    <div class="col">
+                        <InputNumber @bind-Value=BookOutForm.DesiredCount></InputNumber>
+                    </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <button type="submit" class="btn-primary">Ausbuchen</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn-secondary" @onclick="GoBack" >Zurück</button>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-danger">@ErrorMessage </h2>
+
+        </EditForm>
+    </div>
+}
+else
+{
+    <h1>Loading</h1>
+}
+
+@code {
+
+    [Parameter]
+    public string? ArticelNumber { get; set; }
+
+
+
+    private Articel? Articel;
+    private BookOutForm BookOutForm = new BookOutForm();
+
+    private string ErrorMessage = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Articel = await ArticelService.GetArticel(Convert.ToInt32(ArticelNumber));
+
+        BookOutForm.ArticelNumber = Articel.ArticelNumber;
+    }
+
+    private async Task OnValidSubmit()
+    {
+        if (BookOutForm.DesiredCount > Articel?.Count)
+        {
+            ErrorMessage = $"Only {Articel?.Count} Units available!";
+            return;
+        }
+
+        ErrorMessage = "";
+        await ArticelService.BookOutArticel(BookOutForm.ArticelNumber, BookOutForm.DesiredCount);
+
+        NavigationManager.NavigateTo("");
+    }
+
+    private void GoBack ()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

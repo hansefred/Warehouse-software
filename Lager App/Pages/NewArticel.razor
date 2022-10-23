@@ -1,0 +1,79 @@
+﻿@page "/NewArticel"
+<PageTitle>NewArticel</PageTitle>
+@using Lager_App.Model
+@using Lager_App.Service
+@inject ArticelService service
+@inject NavigationManager navigationManager
+
+<div class="m-2 text-center">
+    <h2>Neuer Artikel</h2>
+</div>
+
+<div class="container  m-3">
+    <EditForm Model="@Articel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row">
+            <div class="col">
+                <label for="Articel_Name" class="form-label">Artikel Name:</label>
+            </div>
+            <div class="col-9">
+                <InputText id="Articel_Name" class="form-control" @bind-Value="Articel.Name"></InputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Articel_Count" class="form-label">Artikel Anzahl:</label>
+            </div>
+
+            <div class="col-9">
+                <InputNumber id="Articel_Count" class="form-label m-1" @bind-Value="Articel.Count"></InputNumber>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Articel_Price" class="form-label">Artikel Preis in €:</label>
+            </div>
+            <div class="col-9">
+                <InputNumber id="Articel_Price" class="form-label m-1" @bind-Value="Articel.Price"></InputNumber>
+            </div>
+
+
+        </div>
+
+
+        <div class="mt-4">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn-primary">Artikel erstellen</button>
+                </div>
+                <div class="col">
+                    <button class="btn-danger" @onclick="Back">Zurück</button>
+                </div>
+            </div>
+
+        </div>
+
+    </EditForm>
+</div>
+
+
+@code {
+
+    private Articel Articel = new();
+
+
+    private async Task HandleValidSubmit()
+    {
+        await service.CreateArticel(Articel);
+        navigationManager.NavigateTo("");
+    }
+
+    private void Back ()
+    {
+        navigationManager.NavigateTo("");
+    }
+
+}

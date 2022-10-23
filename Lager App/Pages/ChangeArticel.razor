@@ -1,0 +1,93 @@
+﻿@page "/ChangeArticel/{ArticelNumber}"
+@using Lager_App.Model
+@using Lager_App.Service
+
+
+@inject ArticelService ArticelService
+@inject NavigationManager NavigationManager
+
+
+<div class="m-2 text-center">
+    <h2>Artikel ändern</h2>
+</div>
+
+<div class="container  m-3">
+    <EditForm Model="@ChangeArticelForm" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row">
+            <div class="col">
+                <label for="Articel_Name" class="form-label">Artikel Name:</label>
+            </div>
+            <div class="col-9">
+                <InputText id="Articel_Name" class="form-control" @bind-Value="ChangeArticelForm.Name"></InputText>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Articel_Price" class="form-label">Artikel Preis in €:</label>
+            </div>
+            <div class="col-9">
+                <InputNumber id="Articel_Price" class="form-label m-1" @bind-Value="ChangeArticelForm.Price"></InputNumber>
+            </div>
+
+
+        </div>
+
+
+        <div class="mt-4">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn-primary">Artikel ändern</button>
+                </div>
+                <div class="col">
+                    <button class="btn-danger" @onclick="GoBack">Zurück</button>
+                </div>
+            </div>
+
+        </div>
+        <h2 class="text-danger">@ErrorMessage </h2>
+    </EditForm>
+</div>
+
+@code{
+
+    [Parameter]
+    public string? ArticelNumber { get; set; }
+
+
+
+    private Articel? Articel;
+    private ChangeArticelForm? ChangeArticelForm;
+
+    private string ErrorMessage = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Articel = await ArticelService.GetArticel(Convert.ToInt32(ArticelNumber));
+
+        ChangeArticelForm = new ChangeArticelForm(Articel);
+    }
+
+    private async Task OnValidSubmit()
+    {
+        ErrorMessage = "";
+        try
+        {
+            await ArticelService.ChangeArticel(Articel.ArticelNumber, ChangeArticelForm.Name, ChangeArticelForm.Price);
+            NavigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+            return;
+        }
+
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

@@ -1,0 +1,95 @@
+﻿@page "/BookInArticel/{ArticelNumber}"
+@using Lager_App.Model
+@using Lager_App.Service
+
+
+@inject ArticelService ArticelService
+@inject NavigationManager NavigationManager
+
+
+<div class="m-2 text-center">
+    <h2>Artikel einbuchen</h2>
+</div>
+
+@if (Articel is not null)
+{
+    <div class="container text-center m-3">
+        <EditForm Model="@BookInForm" OnValidSubmit="OnValidSubmit">
+            <div>
+                <div class="row">
+                    <div class="col">
+                        Artikel Nummer:
+                    </div>
+                    <div class="col">
+                        @BookInForm.ArticelNumber
+                    </div>
+                    <div class="col">
+                        Menge:
+                    </div>
+                    <div class="col">
+                        <InputNumber @bind-Value=BookInForm.DesiredCount></InputNumber>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <button type="submit" class="btn-primary">Einbuchen</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn-secondary" @onclick="GoBack">Zurück</button>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-danger">@ErrorMessage </h2>
+
+        </EditForm>
+    </div>
+}
+else
+{
+    <h1>Loading</h1>
+}
+
+
+@code {
+
+    [Parameter]
+    public string? ArticelNumber { get; set; }
+
+    private Articel? Articel;
+    private BookInForm BookInForm = new();
+
+    private string ErrorMessage = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Articel = await ArticelService.GetArticel(Convert.ToInt32(ArticelNumber));
+
+        BookInForm.ArticelNumber = Articel.ArticelNumber;
+    }
+
+    private async Task OnValidSubmit()
+    {
+        ErrorMessage = "";
+        try
+        {
+            await ArticelService.BookInArticel(BookInForm.ArticelNumber, BookInForm.DesiredCount);
+
+            NavigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+
+
+        
+    }
+
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+
+}

@@ -1,0 +1,32 @@
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Lager App.exe
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Lager App.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Lager App.runtimeconfig.json
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Lager App.pdb
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.Sqlite.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Sqlite.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\SQLitePCLRaw.batteries_v2.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\SQLitePCLRaw.core.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\alpine-x64\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-arm\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-arm64\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-armel\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-mips64\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-musl-x64\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-s390x\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-x64\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\linux-x86\native\libe_sqlite3.so
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\osx-arm64\native\libe_sqlite3.dylib
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\osx-x64\native\libe_sqlite3.dylib
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm\native\e_sqlite3.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm64\native\e_sqlite3.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\e_sqlite3.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Mark\source\repos\Lager App\Lager App\obj\Release\net6.0\PubTmp\Out\Lager App.deps.json

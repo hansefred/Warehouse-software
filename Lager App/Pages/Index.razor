@@ -1,0 +1,151 @@
+﻿@page "/"
+@using Lager_App.Model
+@using Lager_App.Service
+@inject ArticelService articelService
+@inject NavigationManager navigationManager
+
+<div class="m-2 text-center">
+    <h2>Alle Artikel</h2>
+</div>
+
+
+
+
+
+@if (_filteredarticels is not null)
+{
+    <div class="row mb-3">
+        <EditForm Model="SearchText">
+            <div class="col">
+                <label class="form-label" for="SearchInput">Suchen</label>
+                <InputText class="form-control" @bind-Value="SearchText" id="SearchInput"></InputText>
+            </div>
+        </EditForm>
+    </div>
+    <div class="m-3">
+        <button class="btn-primary" @onclick="NewArticel">Artikel Hinzufügen</button>
+    </div>
+    <Virtualize Context="Articel" Items="_filteredarticels">
+        <div class="card">
+            <div class="card-header">
+                @Articel.Name (@Articel.ArticelNumber)
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        Bestand
+                    </div>
+                    <div class="col">
+                        @Articel.Count
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Preis in €
+                    </div>
+                    <div class="col">
+                        @Articel.Price.ToString("0.00")
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <button  class="btn-primary" @onclick="(() => BookOut(Articel.ArticelNumber))" >Ausbuchen</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn-secondary" @onclick=" (()=> BookIn(Articel.ArticelNumber))">Einbuchen</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn-link" @onclick=" (()=> Change(Articel.ArticelNumber))">Ändern</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn-danger" @onclick=" (()=> Delete(Articel.ArticelNumber))">Löschen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Virtualize>
+}
+
+
+@code {
+
+    private List<Articel>? _allarticels = null;
+    private List<Articel>? _filteredarticels = null;
+
+    private string _searchtext = "";
+
+    public string SearchText
+    {
+        get
+        {
+            return _searchtext;
+        }
+        set
+        {
+            _searchtext = value;
+            Filter();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadList();
+
+    }
+
+    private void BookOut (int ArticelNumber)
+    {
+        navigationManager.NavigateTo($"/BookOutArticel/{ArticelNumber}");
+    }
+
+    private void BookIn(int ArticelNumber)
+    {
+        navigationManager.NavigateTo($"/BookInArticel/{ArticelNumber}");
+    }
+
+    private async Task Delete(int ArticelNumber)
+    {
+        await articelService.DeleteArticel(ArticelNumber);
+        await LoadList();
+
+    }
+
+    private void NewArticel ()
+    {
+        navigationManager.NavigateTo("/NewArticel");
+    }
+
+    private void Change (int ArticelNumber)
+    {
+        navigationManager.NavigateTo($"/ChangeArticel/{ArticelNumber}");
+    }
+
+    private async Task LoadList ()
+    {
+        _allarticels = await articelService.GetArticels();
+        Filter();
+    }
+
+
+    private void Filter ()
+    {
+        if (_allarticels is  null)
+        {
+            return;
+        }
+        if (String.IsNullOrWhiteSpace(SearchText))
+        {
+            _filteredarticels = _allarticels;
+            return;
+        }
+
+        _filteredarticels = _allarticels
+        .Where(o => o.Name.ToLower().Contains(SearchText.ToLower()) ||
+        o.ArticelNumber.ToString().ToLower().Contains(SearchText.ToLower()))
+        .ToList();
+
+      
+
+    }
+}
+
