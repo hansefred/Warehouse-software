@@ -16,4 +16,3 @@ Use SQLLite as only one cliet is needed and migration is easy with copy-paste of
 
 
 
-Translated with www.DeepL.com/Translator (free version)
